@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #81e2f3, #1c92d2);
+        }
+        .todo-container{
+            background: #fff;
+            padding: 1.85rem;
+            border-radius: 0.9375rem;
+            box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.1);
+            width: 70%;
+            max-width: 28.125rem;
+            text-align: center;
+        }
+        .todo-title{
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+            color: #333;
+        }
+        .todo-input{
+            width: 80%;
+            padding: 0.625rem;
+            margin-bottom: 0.625rem;
+            border: 0.125rem solid #ccc;
+            border-radius: 0.3125rem;
+        }
+        .todo-button{
+            padding: 0.625rem 1.25rem;
+            background-color: #1c92d2;
+            color: white;
+            border: none;
+            border-radius: 0.3125rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .todo-list{
+            list-style-type: none;
+            padding: 0;
+        }
+        .todo-item{
+            background: #f9f9f9;
+            padding: 0.625rem;
+            margin: 0.3125rem 0;
+            border-radius: 0.3125rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .delete-button{
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 0.3125rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .delete-button:hover{
+            background: #d45d5d;
+
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="addTodo(event)" class="todo-container">
+        <div class="todo-title">My To-Do list</div>
+        <input type="text" class="todo-input" placeholder="Add a new task...">
+        <button class="todo-button" type="submit">Add Task</button>
+        <ul class="todo-list"></ul>
+    </form>
+
+    <script>
+        function addTodo(e){
+            e.preventDefault();
+            const todoInput = document.querySelector(".todo-input");
+            const todoList = document.querySelector(".todo-list");
+
+            if(todoInput.value.trim()!==""){
+                const todoItem = document.createElement("li");
+                todoItem.className = "todo-item";
+                todoItem.innerHTML=`${todoInput.value} <button class="delete-button" onclick="deleteTodo(this)">Delete</button>`;
+                todoList.appendChild(todoItem);
+                todoInput.value="";
+            }
+        }
+
+        function deleteTodo(button){
+            const todoItem = button.parentElement;
+            todoItem.remove();
+        }
+    </script>
+</body>
+</html>
